@@ -24,6 +24,7 @@ namespace CRM.DBConnection.Web.Models
         public string chUpdateBy { get; set; }
         public System.DateTime dtUpdateDate { get; set; }
         public byte tiRecordStatus { get; set; }
+        [Timestamp]
         public byte[] tsFireSocket { get; set; }
         public Nullable<int> iEventStopStatus { get; set; }
         public Nullable<byte> tiDisplay { get; set; }

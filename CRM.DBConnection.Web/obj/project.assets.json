@@ -8902,11 +8902,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\svaddara\\source\\repos\\CRM.DBConnection\\CRM.DBConnection.Web\\CRM.DBConnection.Web.csproj",
+      "projectUniqueName": "C:\\Shivakumar\\Repos\\CRM.DBConnection\\CRM.DBConnection.Web\\CRM.DBConnection.Web.csproj",
       "projectName": "CRM.DBConnection.Web",
-      "projectPath": "C:\\Users\\svaddara\\source\\repos\\CRM.DBConnection\\CRM.DBConnection.Web\\CRM.DBConnection.Web.csproj",
+      "projectPath": "C:\\Shivakumar\\Repos\\CRM.DBConnection\\CRM.DBConnection.Web\\CRM.DBConnection.Web.csproj",
       "packagesPath": "C:\\Users\\svaddara\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\svaddara\\source\\repos\\CRM.DBConnection\\CRM.DBConnection.Web\\obj\\",
+      "outputPath": "C:\\Shivakumar\\Repos\\CRM.DBConnection\\CRM.DBConnection.Web\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

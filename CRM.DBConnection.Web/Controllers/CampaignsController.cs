@@ -91,10 +91,16 @@ namespace CRM.DBConnection.Web.Controllers
         public async Task<ActionResult<Campaign>> PostCampaign(Campaign campaign)
         {
             _context = GetCampaignsContext(3);
+            try
+            {
+                _context.Campaign.Add(campaign);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
 
-            _context.Campaign.Add(campaign);
-            await _context.SaveChangesAsync();
-
+                throw;
+            }
             return CreatedAtAction("GetCampaign", new { id = campaign.iCampaignId }, campaign);
         }
 
