@@ -56,7 +56,7 @@ namespace CRM.DBConnection.Web.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCampaign(int id, Campaign campaign)
         {
-            _context = GetCampaignsContext(3);
+            _context = GetCampaignsContext(campaign.iSiteId);
 
             if (id != campaign.iCampaignId)
             {
@@ -90,7 +90,7 @@ namespace CRM.DBConnection.Web.Controllers
         [HttpPost]
         public async Task<ActionResult<Campaign>> PostCampaign(Campaign campaign)
         {
-            _context = GetCampaignsContext(3);
+            _context = GetCampaignsContext(campaign.iSiteId);
             try
             {
                 _context.Campaign.Add(campaign);
