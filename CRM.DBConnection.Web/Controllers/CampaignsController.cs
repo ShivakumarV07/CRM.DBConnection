@@ -69,7 +69,7 @@ namespace CRM.DBConnection.Web.Controllers
             {
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException ex)
             {
                 if (!CampaignExists(id))
                 {
@@ -115,8 +115,11 @@ namespace CRM.DBConnection.Web.Controllers
             {
                 return NotFound();
             }
+            //Hard Delete
+            //_context.Campaign.Remove(campaign);
 
-            _context.Campaign.Remove(campaign);
+            //Soft Delete
+            campaign.tiRecordStatus = 0;
             await _context.SaveChangesAsync();
 
             return campaign;
@@ -125,7 +128,7 @@ namespace CRM.DBConnection.Web.Controllers
         private bool CampaignExists(int id)
         {
             _context = GetCampaignsContext(3);
-            return _context.Campaign.Any(e => e.iCampaignId == id);
+            return _context.Campaign.Any(e => e.iCampaignId == id && e.tiRecordStatus == 1);
         }
 
         private CampaignsContext GetCampaignsContext(int siteId)
