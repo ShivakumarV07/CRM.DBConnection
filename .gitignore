@@ -1,5 +1,7 @@
 [Oo]bj/
 [Bb]in/
+[Bb]in/Debug/
+[Oo]bj/Debug/
 .vs/
 TestResults/
 .nuget/

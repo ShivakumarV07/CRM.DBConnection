@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -9,10 +10,12 @@ namespace CRM.DBConnection.Web.Data
     public class DbAccess
     {
         private readonly DirectorContext _context;
+        private IConfiguration _config;
 
-        public DbAccess(DirectorContext context)
+        public DbAccess(DirectorContext context, IConfiguration config)
         {
             _context = context;
+            _config = config;
         }
         
         public string RetrieveConnectStr(int siteId)
@@ -20,9 +23,8 @@ namespace CRM.DBConnection.Web.Data
             try
             {
                 var siteInfo = _context.Sites.FirstOrDefault(s => s.SiteId == siteId);
-                //string connString = Configuration["siteConn"].ToString();
-                //string connString = ConfigurationManager.AppSettings["siteConn"].ToString();
-                string connString = "Server=LT50030\\MSSQLSITES;Database={database};Trusted_Connection=True;MultipleActiveResultSets=true";
+                string connString = _config.GetConnectionString("siteConn");
+                connString = connString.Replace("{server}", siteInfo.SqlServerNetworkName);
                 connString = connString.Replace("{database}", siteInfo.DatabaseName);
                 return connString;
             }

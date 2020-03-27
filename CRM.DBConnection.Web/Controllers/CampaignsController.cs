@@ -29,17 +29,17 @@ namespace CRM.DBConnection.Web.Controllers
 
         // GET: api/Campaigns
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Campaign>>> GetCampaign()
+        public async Task<ActionResult<IEnumerable<Campaign>>> GetCampaign(int siteId)
         {
-            _context = GetCampaignsContext(3);
+            _context = GetCampaignsContext(siteId);
             return await _context.Campaign.Take(10).ToListAsync();
         }
 
         // GET: api/Campaigns/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Campaign>> GetCampaign(int id)
+        public async Task<ActionResult<Campaign>> GetCampaign(int id, int siteId)
         {
-            _context = GetCampaignsContext(3);
+            _context = GetCampaignsContext(siteId);
             var campaign = await _context.Campaign.FindAsync(id);
 
             if (campaign == null)
@@ -71,7 +71,7 @@ namespace CRM.DBConnection.Web.Controllers
             }
             catch (DbUpdateConcurrencyException ex)
             {
-                if (!CampaignExists(id))
+                if (!CampaignExists(id,campaign.iSiteId))
                 {
                     return NotFound();
                 }
@@ -106,9 +106,9 @@ namespace CRM.DBConnection.Web.Controllers
 
         // DELETE: api/Campaigns/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Campaign>> DeleteCampaign(int id)
+        public async Task<ActionResult<Campaign>> DeleteCampaign(int id, int siteId)
         {
-            _context = GetCampaignsContext(3);
+            _context = GetCampaignsContext(siteId);
 
             var campaign = await _context.Campaign.FindAsync(id);
             if (campaign == null)
@@ -125,9 +125,9 @@ namespace CRM.DBConnection.Web.Controllers
             return campaign;
         }
 
-        private bool CampaignExists(int id)
+        private bool CampaignExists(int id, int siteId)
         {
-            _context = GetCampaignsContext(3);
+            _context = GetCampaignsContext(siteId);
             return _context.Campaign.Any(e => e.iCampaignId == id && e.tiRecordStatus == 1);
         }
 
